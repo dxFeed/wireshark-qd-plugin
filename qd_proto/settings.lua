@@ -9,7 +9,7 @@ settings = {
     -- Enable flag.
     is_enabled = true,
     -- TCP port.
-    port = 6666
+    port = 7300
 }
 
 -- Sets a preference in Wireshark.
