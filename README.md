@@ -31,9 +31,3 @@ Right click on the packet and select "Decode As...". In the window that opens, s
 Current QD protocol, click OK.
 
 ![Decode As...](doc/img/wireshark_decode_as.png?raw=true)
-
-The plugin has some settings that are available by right clicking on the package. Warning, if you use "Decode As..." you
-can't change "TCP port" or check "Enabled" in plugin settings, Wireshark will overwrite these changes (other settings
-will be available), but it's easier and faster than opening Edit -> Preferences -> Protocols -> QD and set the TCP port.
-
-![Plugins preference](doc/img/wireshark_plugin_settings.png?raw=true)
