@@ -9,7 +9,6 @@
 -- i.e. a code point in the range U+10000 to U+10FFFF,
 -- is first represented as a surrogate pair, like in UTF-16,
 -- and then each surrogate code point is encoded in UTF-8.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 local compact_reader = require("qd_proto.io.compact_reader")
 

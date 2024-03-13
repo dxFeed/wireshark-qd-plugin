@@ -1,7 +1,6 @@
 -- @file remove_subscription.lua
 -- @brief The TICKER_REMOVE_SUBSCRIPTION, HISTORY_REMOVE_SUBSCRIPTION and
 --        STREAM_REMOVE_SUBSCRIPTION message dissector.
-package.prepend_path(Dir.global_plugins_path())
 local stream_reader = require("qd_proto.io.stream_reader")
 local symbol_reader = require("qd_proto.io.symbol_reader"):new()
 

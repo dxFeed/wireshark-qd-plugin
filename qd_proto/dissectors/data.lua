@@ -1,6 +1,5 @@
 -- @file data.lua
 -- @brief The TICKER_DATA, HISTORY_DATA and STREAM_DATA message dissector.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 local data_struct = require("qd_proto.data_struct")
 local stream_reader = require("qd_proto.io.stream_reader")

@@ -1,6 +1,5 @@
 -- @file describe_records.lua
 -- @brief The DESCRIBE_RECORDS message dissector.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 local data_struct = require("qd_proto.data_struct")
 local dbg = require("qd_proto.dbg")

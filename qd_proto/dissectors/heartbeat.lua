@@ -1,6 +1,5 @@
 -- @file heartbeat.lua
 -- @brief The HEARTBEAT message dissector.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 local stream_reader = require("qd_proto.io.stream_reader")
 

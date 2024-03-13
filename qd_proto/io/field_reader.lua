@@ -1,6 +1,5 @@
 -- @file field_reader.lua
 -- @brief Reads fields with a specific type from data packet.
-package.prepend_path(Dir.global_plugins_path())
 local data_struct = require("qd_proto.data_struct")
 local decimal = require("qd_proto.format.decimal")
 local wide_decimal = require("qd_proto.format.wide_decimal")

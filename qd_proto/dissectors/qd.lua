@@ -1,6 +1,5 @@
 -- @file qd.lua
 -- @brief The QD message dissector.
-package.prepend_path(Dir.global_plugins_path())
 local data_struct = require("qd_proto.data_struct")
 local utils = require("qd_proto.utils")
 local dbg = require("qd_proto.dbg")

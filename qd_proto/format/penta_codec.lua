@@ -36,7 +36,6 @@
 -- 11111101 zzz - for CESU-8 string with length in characters
 -- 11111110     - for 0-bit penta (empty symbol)
 -- 11111111     - for void (null)
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 
 local PentaCodec = {}

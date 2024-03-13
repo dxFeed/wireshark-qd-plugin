@@ -1,7 +1,6 @@
 -- @file wide_decimal.lua
 -- @brief The file contains a set of methods to work with
 -- floating-point numbers packed into long primitive type.
-package.prepend_path(Dir.global_plugins_path())
 local wide_decimal = {}
 
 -- List of constant values.

@@ -1,6 +1,5 @@
 -- @file describe_protocol.lua
 -- @brief The DESCRIBE_PROTOCOL message dissector.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require('qd_proto.utils')
 local stream_reader = require("qd_proto.io.stream_reader")
 

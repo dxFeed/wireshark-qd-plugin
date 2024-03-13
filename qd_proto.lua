@@ -1,6 +1,5 @@
 -- @file qd_proto.lua
 -- @brief Main plugin file. Contains functions that Wireshark calls.
-package.prepend_path(Dir.global_plugins_path())
 local settings = require("qd_proto.settings")
 local utils = require("qd_proto.utils")
 local qd = require("qd_proto.dissectors.qd")

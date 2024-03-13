@@ -1,6 +1,5 @@
 -- @file symbol_reader.lua
 -- @brief Reads "symbol" data form the buffer.
-package.prepend_path(Dir.global_plugins_path())
 local penta_codec = require("qd_proto.format.penta_codec"):new()
 
 local SymbolReader = {}

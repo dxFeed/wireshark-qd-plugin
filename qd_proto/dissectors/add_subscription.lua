@@ -1,7 +1,6 @@
 -- @file add_subscription.lua
 -- @brief The TICKER_ADD_SUBSCRIPTION, HISTORY_ADD_SUBSCRIPTION and
 --        STREAM_ADD_SUBSCRIPTION message dissector.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 local data_struct = require("qd_proto.data_struct")
 local stream_reader = require("qd_proto.io.stream_reader")

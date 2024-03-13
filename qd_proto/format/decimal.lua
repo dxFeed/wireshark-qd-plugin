@@ -1,7 +1,6 @@
 -- @file decimal.lua
 -- The file contains a set of methods to work with
 -- floating-point numbers packed into primitive type.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require "qd_proto.utils"
 local decimal = {}
 

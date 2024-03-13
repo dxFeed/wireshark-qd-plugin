@@ -15,7 +15,6 @@
 -- 1111110x 48x - for -281474976710656 to 281474976710656
 -- 11111110 56x - for -36028797018963968 to 36028797018963968
 -- 11111111 64x - for -9223372036854775808 to 9223372036854775808
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 
 local compact_reader = {}

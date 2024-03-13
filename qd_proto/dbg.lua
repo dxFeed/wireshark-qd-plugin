@@ -1,6 +1,5 @@
 -- @file dbg.lua
 -- @brief Provides debug output.
-package.prepend_path(Dir.global_plugins_path())
 local utils = require("qd_proto.utils")
 
 local dbg = {}
