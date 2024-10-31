@@ -10,6 +10,11 @@ local describe_records = require("qd_proto.dissectors.describe_records")
 local add_subscription = require("qd_proto.dissectors.add_subscription")
 local data = require("qd_proto.dissectors.data")
 local remove_subscription = require("qd_proto.dissectors.remove_subscription")
+local rmi_advertise_services = require("qd_proto.dissectors.rmi_advertise_services")
+local rmi_describe_operation = require("qd_proto.dissectors.rmi_describe_operation")
+local rmi_describe_subject = require("qd_proto.dissectors.rmi_describe_subject")
+local rmi_request = require("qd_proto.dissectors.rmi_request")
+local rmi_response = require("qd_proto.dissectors.rmi_response")
 
 -- Creates the protocol object.
 local qd_proto = Proto("QD", "Quote Distribution protocol")
@@ -21,6 +26,11 @@ utils.append_to_table(qd_proto.fields, describe_records.ws_fields)
 utils.append_to_table(qd_proto.fields, add_subscription.ws_fields)
 utils.append_to_table(qd_proto.fields, data.ws_fields)
 utils.append_to_table(qd_proto.fields, remove_subscription.ws_fields)
+utils.append_to_table(qd_proto.fields, rmi_advertise_services.ws_fields)
+utils.append_to_table(qd_proto.fields, rmi_describe_operation.ws_fields)
+utils.append_to_table(qd_proto.fields, rmi_describe_subject.ws_fields)
+utils.append_to_table(qd_proto.fields, rmi_request.ws_fields)
+utils.append_to_table(qd_proto.fields, rmi_response.ws_fields)
 
 -- Called Wireshark when plugin loading.
 function qd_proto.init()
@@ -80,6 +90,16 @@ local function parse_message(proto, type, tvb_buf, packet_info, subtree)
             type == data_struct.qd_type.HISTORY_REMOVE_SUBSCRIPTION or
             type == data_struct.qd_type.STREAM_REMOVE_SUBSCRIPTION) then
         remove_subscription.dissect(proto, tvb_buf, packet_info, subtree)
+    elseif (type == data_struct.qd_type.RMI_ADVERTISE_SERVICES) then
+        rmi_advertise_services.dissect(proto, tvb_buf, packet_info, subtree)
+    elseif (type == data_struct.qd_type.RMI_DESCRIBE_OPERATION) then
+        rmi_describe_operation.dissect(proto, tvb_buf, packet_info, subtree)
+    elseif (type == data_struct.qd_type.RMI_DESCRIBE_SUBJECT) then
+        rmi_describe_subject.dissect(proto, tvb_buf, packet_info, subtree)
+    elseif (type == data_struct.qd_type.RMI_REQUEST) then
+        rmi_request.dissect(proto, tvb_buf, packet_info, subtree)
+    elseif (type == data_struct.qd_type.RMI_RESPONSE) then
+        rmi_response.dissect(proto, tvb_buf, packet_info, subtree)
     end
 end
 

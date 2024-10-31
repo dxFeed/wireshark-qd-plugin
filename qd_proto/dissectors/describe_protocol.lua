@@ -62,16 +62,7 @@ end
 -- @param stream Represents the input buffer.
 -- @param tree The tree for display.
 local function display_endpoint_id(stream, tree)
-    local sub = tree:add("Endpoint ID")
-
-    local jvm_id, jvm_id_range = stream:read_byte_array()
-    sub:add(jvm_id_range, "JVM ID: " .. jvm_id:tohex())
-
-    local name, name_range = stream:read_utf8_str()
-    sub:add(name_range, "Name: " .. name)
-
-    local id, id_range = stream:read_compact_long()
-    sub:add(id_range, "ID: " .. id)
+    utils.add_endpoint_subtree(tree, "Endpoint", stream)
 end
 
 -- Displays DESCRIBE_PROTOCOL message in Wireshark.

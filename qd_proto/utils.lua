@@ -1,5 +1,7 @@
 -- @file utils.lua
 -- @brief Provides general utility functions.
+local jvm_id = require("qd_proto.format.jvm_id")
+
 local utils = {}
 
 -- @brief Compact Format.
@@ -358,6 +360,71 @@ function utils.bit_flags_to_str(enum_table, flags)
         end
         mask = bit.lshift(mask, 1)
     end
+    return str
+end
+
+-- Adds an endpoint subtree to the given tree structure.
+-- This function reads JVM UID, name, and ID from the stream,
+-- constructs a subtree with the extracted information, and appends it to the main tree.
+-- @param tree The main tree structure to which the subtree will be added.
+-- @param tree_name The name of the subtree to be added.
+-- @param stream The stream object from which data is read.
+-- @return sub The newly created subtree containing the endpoint information;
+--         returns nil if the JVM ID is not found.
+function utils.add_endpoint_subtree(tree, tree_name, stream)
+    local start_pos = stream:get_current_pos()
+
+    local jvm_uid, jvm_uid_range = stream:read_byte_array()
+    if (jvm_id == nil) then
+        return
+    end    
+
+    local jvm_base52_text = jvm_id.toString(jvm_uid);
+    local name, name_range = stream:read_utf8_str()
+    local id, id_range = stream:read_compact_long()
+
+    local total_range = stream:get_range(start_pos, stream:get_current_pos())
+
+    local sub = tree:add(total_range, tree_name .. ": ")
+    sub:add(jvm_uid_range, "JVM UID: " .. jvm_uid:tohex())
+    sub:add(jvm_uid_range, "JVM ID: " .. jvm_base52_text)
+    sub:add(name_range, "Name: " .. name)
+    sub:add(id_range, "ID: " .. id)            
+    sub:append_text(name .. "@" .. jvm_base52_text)
+    sub:append_text(", ID: " .. id)
+    return sub
+end
+
+-- Marshals a byte array into a string if it follows the expected format.
+-- This function checks the magic number and version, verifies the type code,
+-- and then extracts the string content based on the specified length.
+-- @param arr  The byte array to be marshaled.
+-- @return string - The extracted string if the byte array is valid;
+--         hex string representation of the array if the format is invalid.
+function utils.marshal_string(arr)   
+    -- Check magic and version. 
+    local magic = arr:get_index(0) * 256 + arr:get_index(1)
+    local version = arr:get_index(2) * 256 + arr:get_index(3)
+    local signature = magic << 16 | version;
+    if magic ~= 0xACED or version ~= 0x0005 then
+         return arr:tohex();
+    end
+
+    -- Read type.
+    local type_code = arr:get_index(4)
+    if type_code ~= 0x74 then
+        return arr:tohex();
+    end
+    
+    -- Read length.
+    local length = arr:get_index(5) * 256 + arr:get_index(6)
+    
+    -- Read content.
+    local str = ""
+    for i = 7, 6 + length do
+        str = str .. string.char(arr:get_index(i))
+    end
+    
     return str
 end
 
