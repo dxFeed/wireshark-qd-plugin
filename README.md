@@ -4,7 +4,7 @@ A Lua plugin for Wireshark to parse the QD protocol.
 
 ## Requirements
 
-Wireshark >= 3.6.21
+Wireshark >= 4.4.1
 
 ## Installation
 
