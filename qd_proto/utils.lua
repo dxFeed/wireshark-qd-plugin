@@ -373,11 +373,23 @@ end
 --         returns nil if the JVM ID is not found.
 function utils.add_endpoint_subtree(tree, tree_name, stream)
     local start_pos = stream:get_current_pos()
+    
+    local length = stream:read_compact_long()
+    if (length <= 0) then 
+        local name, name_range = stream:read_utf8_str()
+        local id, id_range = stream:read_compact_long()
+
+        local total_range = stream:get_range(start_pos, stream:get_current_pos())
+        local sub = tree:add(total_range, tree_name .. ": ")
+        sub:append_text(name)
+        return sub
+    end
+    stream:set_current_pos(start_pos)
 
     local jvm_uid, jvm_uid_range = stream:read_byte_array()
-    if (jvm_id == nil) then
+    if (jvm_uid == nil) then
         return
-    end    
+    end
 
     local jvm_base52_text = jvm_id.toString(jvm_uid);
     local name, name_range = stream:read_utf8_str()
